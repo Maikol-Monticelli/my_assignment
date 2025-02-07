@@ -1,0 +1,96 @@
+---
+title: "Plotting Assignment"
+author: "Maikol Monticelli"
+date: "2025-02-05"
+output:
+  html_document:
+    code_folding: show
+    highlight: haddock
+    theme: flatly
+    toc: yes
+    toc_float: yes
+---
+
+
+```{r}
+
+library(readr)
+library(ggplot2)
+library(scales)
+library(dplyr)
+library(tidyr)
+library(ThemePark)
+library(patchwork)
+library(janitor)
+library(knitr)
+library(kableExtra)
+
+```
+
+```{r}
+
+# Setting the random seed seed
+set.seed(123)
+
+# Simulating the data
+n <- 100
+daten <- data.frame(
+  x = rnorm(n, mean = 50, sd = 10),
+  y = rnorm(n, mean = 100, sd = 20)
+)
+```
+
+# Bad Plot
+##Why is this a bad plot?:
+ - Not matching colors and simbols 
+ - Only the title but no more informations given, it makes the interpretation really difficult
+ - Ein unübersichtliches Theme 
+ - Zu starke Markierungspunkte (überladen)
+```{r}
+plot_bad <- ggplot(daten, aes(x = x, y = y)) +
+  geom_point(color = "pink", size = 5, shape = 8) +             
+  geom_smooth(method = "lm", se = FALSE, color = "red", linetype = "dotted") +
+  # The void theme has no roster or background
+  theme_void() +                                                 
+  ggtitle("Schlechter Plot")                                     
+
+```
+
+```{r}
+# Ausgabe des schlechten Plots
+print(plot_bad)
+
+```
+
+# Good plot
+## Merkmale eines guten Plots:
+ - Klare und aussagekräftige Achsenbeschriftungen und Titel
+ - Passende Farbauswahl und angemessene Punktgrößen
+ - Ein übersichtliches und modernes Theme (hier: theme_minimal())
+
+```{r}
+plot_gut <- ggplot(daten, aes(x = x, y = y)) +
+  geom_point(color = "steelblue", size = 3, alpha = 0.7) +    
+# Regression line with confidence interval
+  geom_smooth(method = "lm", se = TRUE, color = "darkblue") +        
+  labs(
+    title = "The interplay between x and y",
+    x = "X-Werte",
+    y = "Y-Werte",
+    caption = "The interplay between x and y "
+  ) +
+  theme_minimal(base_size = 14) +                                   
+  theme(
+    plot.title = element_text(face = "bold", hjust = 0.5),
+    plot.caption = element_text(size = 10, hjust = 1)
+  )
+
+```
+
+
+```{r}
+# Ausgabe des guten Plots
+print(plot_gut)
+
+```
+

@@ -1,0 +1,1 @@
+I have generated some data in R to practice the data generation course that we had during the semester.
