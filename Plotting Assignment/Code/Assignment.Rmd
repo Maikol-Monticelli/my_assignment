@@ -13,7 +13,7 @@ output:
 
 
 ```{r}
-
+# Loading some packages for plotting
 library(readr)
 library(ggplot2)
 library(scales)
@@ -29,30 +29,31 @@ library(kableExtra)
 
 ```{r}
 
-# Setting the random seed seed
+# Setting the random seed
 set.seed(123)
 
 # Simulating the data
 n <- 100
-daten <- data.frame(
+game_agression <- data.frame(
   x = rnorm(n, mean = 50, sd = 10),
   y = rnorm(n, mean = 100, sd = 20)
 )
 ```
 
 # Bad Plot
-##Why is this a bad plot?:
+## Why is this a bad plot?:
  - Not matching colors and simbols 
  - Only the title but no more informations given, it makes the interpretation really difficult
- - Ein unübersichtliches Theme 
+ - Chosing a theme that is not good for the type of plot 
  - Zu starke Markierungspunkte (überladen)
+ 
 ```{r}
-plot_bad <- ggplot(daten, aes(x = x, y = y)) +
+plot_bad <- ggplot(game_agression, aes(x = x, y = y)) +
   geom_point(color = "pink", size = 5, shape = 8) +             
   geom_smooth(method = "lm", se = FALSE, color = "red", linetype = "dotted") +
   # The void theme has no roster or background
   theme_void() +                                                 
-  ggtitle("Schlechter Plot")                                     
+  ggtitle("Connection between games and agression")                                     
 
 ```
 
@@ -63,13 +64,13 @@ print(plot_bad)
 ```
 
 # Good plot
-## Merkmale eines guten Plots:
+## Why is this a good plot?:
  - Klare und aussagekräftige Achsenbeschriftungen und Titel
  - Passende Farbauswahl und angemessene Punktgrößen
- - Ein übersichtliches und modernes Theme (hier: theme_minimal())
+ - Chosing a simple and modern theme to make it more attractive
 
 ```{r}
-plot_gut <- ggplot(daten, aes(x = x, y = y)) +
+plot_good <- ggplot(game_agression, aes(x = x, y = y)) +
   geom_point(color = "steelblue", size = 3, alpha = 0.7) +    
 # Regression line with confidence interval
   geom_smooth(method = "lm", se = TRUE, color = "darkblue") +        
@@ -90,7 +91,7 @@ plot_gut <- ggplot(daten, aes(x = x, y = y)) +
 
 ```{r}
 # Ausgabe des guten Plots
-print(plot_gut)
+print(plot_good)
 
 ```
 
