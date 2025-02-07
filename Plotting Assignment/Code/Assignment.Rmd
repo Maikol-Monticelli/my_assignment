@@ -11,7 +11,7 @@ output:
     toc_float: yes
 ---
 
-
+# Loading dependencies
 ```{r}
 # Loading some packages for plotting
 library(readr)
@@ -27,6 +27,7 @@ library(kableExtra)
 
 ```
 
+# Data generation
 ```{r}
 
 # Setting the random seed
@@ -40,34 +41,42 @@ game_agression <- data.frame(
 )
 ```
 
-# Bad Plot
-## Why is this a bad plot?:
- - Not matching colors and simbols 
- - Only the title but no more informations given, it makes the interpretation really difficult
- - Chosing a theme that is not good for the type of plot 
- - Zu starke Markierungspunkte (überladen)
+# Plotting
+
+## Bad Plot
+
+### Why is this a bad plot?
+
+ - Not matching colors and symbols 
+ - Only the title but no more information given, it makes the interpretation really difficult
+ - Choosing a theme that is not good for the type of plot 
+ - Overloaded and crowded
  
 ```{r}
 plot_bad <- ggplot(game_agression, aes(x = x, y = y)) +
+# Adding colors and making the lining worse
   geom_point(color = "pink", size = 5, shape = 8) +             
   geom_smooth(method = "lm", se = FALSE, color = "red", linetype = "dotted") +
-  # The void theme has no roster or background
+# The void theme has no roster or background
   theme_void() +                                                 
   ggtitle("Connection between games and agression")                                     
 
 ```
 
 ```{r}
-# Ausgabe des schlechten Plots
+# Printing the bad plot
 print(plot_bad)
 
 ```
 
-# Good plot
-## Why is this a good plot?:
- - Klare und aussagekräftige Achsenbeschriftungen und Titel
- - Passende Farbauswahl und angemessene Punktgrößen
- - Chosing a simple and modern theme to make it more attractive
+## Good plot
+
+### Why is this a good plot?
+
+ - Clear description of x and y axes 
+ - Good coloring and making it okay for everyone taking in regard the most common color blindness
+ - Choosing a simple and modern theme to make it more attractive
+ - Good scalings values
 
 ```{r}
 plot_good <- ggplot(game_agression, aes(x = x, y = y)) +
@@ -75,12 +84,13 @@ plot_good <- ggplot(game_agression, aes(x = x, y = y)) +
 # Regression line with confidence interval
   geom_smooth(method = "lm", se = TRUE, color = "darkblue") +        
   labs(
-    title = "The interplay between x and y",
-    x = "X-Werte",
-    y = "Y-Werte",
-    caption = "The interplay between x and y "
+    title = "The interplay between games and agression",
+    x = "Game Time in min",
+    y = "Agression Value",
+    caption = "The data was simulated thanks to R"
   ) +
-  theme_minimal(base_size = 14) +                                   
+  theme_minimal(base_size = 14) + 
+# Centering and making the Title pretty
   theme(
     plot.title = element_text(face = "bold", hjust = 0.5),
     plot.caption = element_text(size = 10, hjust = 1)
@@ -90,8 +100,12 @@ plot_good <- ggplot(game_agression, aes(x = x, y = y)) +
 
 
 ```{r}
-# Ausgabe des guten Plots
+# Printig the good plot
 print(plot_good)
 
 ```
 
+
+
+# Grading
+In my opinion I did a a decent job therefore deserving a 4,5-5 for the plotting.
