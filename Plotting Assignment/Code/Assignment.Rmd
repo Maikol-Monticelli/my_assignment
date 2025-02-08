@@ -47,17 +47,17 @@ game_agression <- data.frame(
 
 ### Why is this a bad plot?
 
- - Not matching colors and symbols 
- - Only the title but no more information given, it makes the interpretation really difficult
- - Choosing a theme that is not good for the type of plot 
- - Overloaded and crowded
+ - Only the title but no more information given, it makes the interpretation really difficult.
+ - Choosing a theme that is not good for the type of plot, by completely wiping the axes, ticks and gridlines.
+ - Really distracting colors and dot type, this makes the data look cluttered and distracting
+ - The colors are not color blindness friendly
  
 ```{r}
 plot_bad <- ggplot(game_agression, aes(x = x, y = y)) +
-# Adding colors and making the lining worse
-  geom_point(color = "pink", size = 5, shape = 8) +             
+# Adding  extreme colors and making the lining worse by dotting it
+  geom_point(color = "pink", size = 7, shape = 8) +             
   geom_smooth(method = "lm", se = FALSE, color = "red", linetype = "dotted") +
-# The void theme has no roster or background
+# The void theme has no axes, ticks or gridlines
   theme_void() +                                                 
   ggtitle("Connection between games and agression")                                     
 
@@ -73,10 +73,12 @@ print(plot_bad)
 
 ### Why is this a good plot?
 
- - Clear description of x and y axes 
- - Good coloring and making it okay for everyone taking in regard the most common color blindness
- - Choosing a simple and modern theme to make it more attractive
- - Good scalings values
+ - Clear description of x and y axes and a detailed title to give the reader all the information needed. 
+ - Good coloring and making it okay for everyone, taking the most common color blindness in consideration.
+ - Choosing a simple and modern theme to make it more attractive.
+ - Slightly transparent points so that the data doesn't seem cluttered and you can see layering dots.
+ - Decent scaling values
+ - Adding the confidenc interval to make the interpretation easier.
 
 ```{r}
 plot_good <- ggplot(game_agression, aes(x = x, y = y)) +
@@ -84,13 +86,14 @@ plot_good <- ggplot(game_agression, aes(x = x, y = y)) +
 # Regression line with confidence interval
   geom_smooth(method = "lm", se = TRUE, color = "darkblue") +        
   labs(
-    title = "The interplay between games and agression",
+# Defining title,x,y and caption   
+     title = "The interplay between games and agression",
     x = "Game Time in min",
     y = "Agression Value",
-    caption = "The data was simulated thanks to R"
+    caption = "The data was simulated thanks to R, n=100"
   ) +
   theme_minimal(base_size = 14) + 
-# Centering and making the Title pretty
+# Centering and making the Title appealing
   theme(
     plot.title = element_text(face = "bold", hjust = 0.5),
     plot.caption = element_text(size = 10, hjust = 1)
@@ -109,3 +112,6 @@ print(plot_good)
 
 # Grading
 In my opinion I did a a decent job therefore deserving a 4,5-5 for the plotting.
+
+ - The bad plot is really messy and unreadable.
+ - The good plot is clear and readable.
