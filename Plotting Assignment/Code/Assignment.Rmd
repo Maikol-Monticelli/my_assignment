@@ -1,7 +1,7 @@
 ---
 title: "Plotting Assignment"
 author: "Maikol Monticelli"
-date: "2025-02-05"
+date: "2025-02-09"
 output:
   html_document:
     code_folding: show
@@ -12,7 +12,7 @@ output:
 ---
 
 # Loading dependencies
-```{r}
+```{r dependencies}
 # Loading some packages for plotting
 library(readr)
 library(ggplot2)
@@ -28,7 +28,7 @@ library(kableExtra)
 ```
 
 # Data generation
-```{r}
+```{r data generation}
 
 # Setting the random seed
 set.seed(123)
@@ -45,14 +45,8 @@ game_agression <- data.frame(
 
 ## Bad Plot
 
-### Why is this a bad plot?
-
- - Only the title but no more information given, it makes the interpretation really difficult.
- - Choosing a theme that is not good for the type of plot, by completely wiping the axes, ticks and gridlines.
- - Really distracting colors and dot type, this makes the data look cluttered and distracting
- - The colors are not color blindness friendly
- 
-```{r}
+### Coding the bad plot 
+```{r bad plot}
 plot_bad <- ggplot(game_agression, aes(x = x, y = y)) +
 # Adding  extreme colors and making the lining worse by dotting it
   geom_point(color = "pink", size = 7, shape = 8) +             
@@ -63,24 +57,26 @@ plot_bad <- ggplot(game_agression, aes(x = x, y = y)) +
 
 ```
 
-```{r}
-# Printing the bad plot
+```{r print and save bad plot}
+# Printing and saving the bad plot
 print(plot_bad)
+ggsave("plot_bad.png",plot = plot_bad,bg= "white")
 
 ```
 
+### Why is this a bad plot?
+
+ - Only the title but no more information given, it makes the interpretation really difficult.
+ - Choosing a theme that is not good for the type of plot, by completely wiping the axes, ticks and gridlines.
+ - Really distracting colors and dot type, this makes the data look cluttered and distracting
+ - The colors are not color blindness friendly
+
+
 ## Good plot
 
-### Why is this a good plot?
+### Coding the good plot
 
- - Clear description of x and y axes and a detailed title to give the reader all the information needed. 
- - Good coloring and making it okay for everyone, taking the most common color blindness in consideration.
- - Choosing a simple and modern theme to make it more attractive.
- - Slightly transparent points so that the data doesn't seem cluttered and you can see layering dots.
- - Decent scaling values
- - Adding the confidenc interval to make the interpretation easier.
-
-```{r}
+```{r good plot}
 plot_good <- ggplot(game_agression, aes(x = x, y = y)) +
   geom_point(color = "steelblue", size = 3, alpha = 0.7) +    
 # Regression line with confidence interval
@@ -101,13 +97,21 @@ plot_good <- ggplot(game_agression, aes(x = x, y = y)) +
 
 ```
 
-
-```{r}
+```{r print and save good plot}
 # Printig the good plot
 print(plot_good)
+ggsave("plot_good.png",plot = plot_good, bg= "white")
 
 ```
 
+### Why is this a good plot?
+
+ - Clear description of x and y axes and a detailed title to give the reader all the information needed. 
+ - Good coloring and making it okay for everyone, taking the most common color blindness in consideration.
+ - Choosing a simple and modern theme to make it more attractive.
+ - Slightly transparent points so that the data doesn't seem cluttered and you can see layering dots.
+ - Decent scaling values
+ - Adding the confidenc interval to make the interpretation easier.
 
 
 # Grading
@@ -115,3 +119,8 @@ In my opinion I did a a decent job therefore deserving a 4,5-5 for the plotting.
 
  - The bad plot is really messy and unreadable.
  - The good plot is clear and readable.
+ 
+```{r}
+sessionInfo()
+```
+ 
